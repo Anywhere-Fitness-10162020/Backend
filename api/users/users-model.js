@@ -3,7 +3,11 @@ const db = require("../../database/connection");
 module.exports = {
   createUser,
   getUsers,
-  getUserBy
+  getUserBy,
+  getUserById,
+  updateUser,
+  deleteUser
+
 };
 
 //CRUD
@@ -19,6 +23,29 @@ async function createUser(obj) {
 function getUsers() {
   return db("users");
 }
+
 function getUserBy(column, value) {
   return db("users").where(column, value);
+}
+
+function getUserById(id) {
+  return db('users')
+    .where('id', id)
+    .first();
+}
+//update
+
+function updateUser(id, changes) {
+  return db('users')
+    .where({ id })
+    .update(changes)
+    .then(() => getUserById(id))
+}
+
+//delete
+
+function deleteUser(id) {
+  return db('users')
+    .where({ id })
+    .del();
 }
