@@ -3,8 +3,7 @@ const db = require("../../database/connection");
 module.exports = {
   createUser,
   getUsers,
-  getUserBy,
-  updateUser,
+  getUserBy
 };
 
 //CRUD
