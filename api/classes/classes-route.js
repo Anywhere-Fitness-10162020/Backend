@@ -4,10 +4,6 @@ const dbFun = require("./classes-model");
 
 const router = express.Router();
 
-//CRUD
-//Create
-
-
 //getClasses --> get a list of all 'classes' --> from endpoint --> /api/classes
 router.get('/', (req, res) => {
   dbFun.getClasses()
