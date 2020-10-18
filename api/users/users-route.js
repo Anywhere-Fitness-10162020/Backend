@@ -1,18 +1,11 @@
 const express = require("express");
 const dbFun = require("./users-model");
-const restricted = require('../auth/restricted-middleware');
-const Users = require('./users-model')
+const restricted = require('../auth/restrictedMiddleware');
+const Users = require('./users-model');
+const restrictedMiddleware = require("../auth/restrictedMiddleware");
 const router = express.Router();
 
 module.exports = router;
-
-
-// begin
-
-
-
-
-//getUsers --> returns a list of all 'users' --> from endpoint --> /api/users
 
 
 //removed 'restricted' for get all users to work
@@ -51,7 +44,7 @@ router.get('/:id', (req, res) => {
 
 // PUT(Update user)
 
-router.put('/:id', (req, res) => {
+router.put('/:id', restrictedMiddleware, (req, res) => {
   Users.updateUser(req.params.id, req.body)
     .then(user => {
       console.log(req.body);
