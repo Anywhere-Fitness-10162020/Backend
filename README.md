@@ -1,6 +1,8 @@
 ### Anywhere Fitness App ###
 
 # Endpoints
+
+// I tried to make this into a table but couldn't figure out how. This is my first time writing "markup"
 ---
  | Login    |   Register    | Users | Classes | Reservations |
  |----------------|:------------------:|:---------------:|-------------------:|:---------------:|:---------------:|
