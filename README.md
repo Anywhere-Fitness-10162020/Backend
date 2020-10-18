@@ -1,11 +1,13 @@
 ### Anywhere Fitness App ###
 
 # Endpoints
+
+// I tried to make this into a table but couldn't figure out how. This is my first time writing "markup"
 ---
  | Login    |   Register    | Users | Classes | Reservations |
  |----------------|:------------------:|:---------------:|-------------------:|:---------------:|:---------------:|
- | _api/auth/login_ | _api/auth/register_ | _api/users_ | _api/classes_ | _api/reservations |
- ---
+ | _api/auth/login_ | _api/auth/register_ | _api/users_ | _api/classes_ | _api/reservations_ |
+---
 ## Register
 ---
 1. To register a user you will need to send data to _api/auth/register_ endpoint:
