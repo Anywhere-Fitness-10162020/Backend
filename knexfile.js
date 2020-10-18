@@ -1,37 +1,44 @@
-// Update with your config settings.
+require('dotenv').config();
 
 module.exports = {
-
   development: {
     client: 'sqlite3',
     connection: {
-        // will generate food.db3 database file
       filename: './database/fitness.db3'
     },
-    useNullAsDefault: true,
-    // needed when using foreign keys
+    migrations: {
+      directory: './migrations'
+    },
+    seeds: {
+      directory: './database/seeds'
+    }
+  },
+
+  testing: {
+    client: 'sqlite3',
+    connection: ':memory:',
     pool: {
-        afterCreate: (conn, done) => {
-        // runs after a connection is made to the sqlite engine
-        conn.run('PRAGMA foreign_keys = ON', done); // turn on FK enforcement
-        }
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done);
+      }
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: './database/migrations'
+    },
+    seeds: {
+      directory: './database/seeds'
     }
   },
 
   production: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    client: 'pg',
+    connection: process.env.DATABASE_URL,
     migrations: {
-      tableName: 'knex_migrations'
+      directory: './database/migrations'
+    },
+    seeds: {
+      directory: './database/seeds'
     }
   }
-
 };

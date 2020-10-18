@@ -1,17 +1,22 @@
 const db = require("../../database/connection");
 
 module.exports = {
+  addUser,
   createUser,
   getUsers,
   getUserBy,
   getUserById,
+  findBy,
   updateUser,
   deleteUser
-
 };
 
 //CRUD
 //Create
+function addUser(user) {
+  return db('users')
+    .insert(user, 'id')
+}
 
 async function createUser(obj) {
   const id = await db("users").insert(obj);
@@ -31,6 +36,12 @@ function getUserBy(column, value) {
 function getUserById(id) {
   return db('users')
     .where('id', id)
+    .first();
+}
+//same as above? 
+function findBy(user) {
+  return db('users')
+    .where('username', user)
     .first();
 }
 //update
