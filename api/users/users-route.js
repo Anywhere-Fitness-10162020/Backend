@@ -2,6 +2,7 @@ const express = require("express");
 const dbFun = require("./users-model");
 const restricted = require('../auth/restrictedMiddleware');
 const Users = require('./users-model');
+const Classes =require('../classes/classes-model')
 const restrictedMiddleware = require("../auth/restrictedMiddleware");
 const router = express.Router();
 
@@ -41,6 +42,19 @@ router.get('/:id', (req, res) => {
       res.status(500).json({ message: 'Sorry, no user with that id returned from the server', error });
     });
 });
+
+// GET CLASSES BY USER ID
+
+router.get('/:id/reservations', (req, res) => {
+    Classes.getClassByUserId(req.params.id)
+      .then(result => {
+        res.status(201).json(result);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({ message: 'sorry something is wrong with the server' });
+      });
+  });
 
 // PUT(Update user)
 

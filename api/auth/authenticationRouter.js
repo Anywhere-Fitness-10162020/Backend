@@ -1,19 +1,15 @@
-const express = require('express')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const middleware = require('../middleware/middleware')
-const Users = require('../users/users-model')
-const router = express.Router()
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const middleware = require("../middleware/middleware");
+const Users = require("../users/users-model");
+const router = express.Router();
 
-
-
-
-router.post('/register', middleware.verifyRegister, async(req, res) => {
+router.post("/register", middleware.verifyRegister, async (req, res) => {
   try {
-  
     const newUser = req.body;
-    const { password } = newUser
-  
+    const { password } = newUser;
+
     const hash = bcrypt.hashSync(password, 10);
   
     const savedUser = await Users.addUser({...newUser, password: hash})
@@ -64,6 +60,21 @@ router.post('/register', middleware.verifyRegister, async(req, res) => {
   
     console.log(process.env.JWT_SECRET)
     return jwt.sign(payload, process.env.JWT_SECRET, options);
-  }
-  
-  module.exports = router;
+  };
+
+function signToken(user) {
+  const payload = {
+    subject: user.id,
+    username: user.username,
+    role: user.role
+  };
+
+  const options = {
+    expiresIn: "1d",
+  };
+
+  console.log(process.env.JWT_SECRET);
+  return jwt.sign(payload, process.env.JWT_SECRET, options);
+}
+
+module.exports = router;

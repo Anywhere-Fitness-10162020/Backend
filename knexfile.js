@@ -7,12 +7,23 @@ module.exports = {
       filename: './database/fitness.db3'
     },
     migrations: {
-      directory: './migrations'
+      directory: './database/migrations'
     },
     seeds: {
       directory: './database/seeds'
     }
   },
+
+  // testing: {
+  //   client: "sqlite3",
+  //   connection: {
+  //     filename: './database/parties.db3'
+  //   },
+  //   useNullAsDefault: true,
+  //   migrations: {
+  //     directory: "./migrations"
+  //   }
+  // },
 
   testing: {
     client: 'sqlite3',
