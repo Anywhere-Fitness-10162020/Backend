@@ -14,6 +14,17 @@ module.exports = {
     }
   },
 
+  // testing: {
+  //   client: "sqlite3",
+  //   connection: {
+  //     filename: './database/parties.db3'
+  //   },
+  //   useNullAsDefault: true,
+  //   migrations: {
+  //     directory: "./migrations"
+  //   }
+  // },
+
   testing: {
     client: 'sqlite3',
     connection: ':memory:',

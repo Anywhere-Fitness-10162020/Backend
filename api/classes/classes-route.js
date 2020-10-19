@@ -96,14 +96,14 @@ router.get('/:id/user_classes', (req, res) => {
     });
 });
 
-router.post('/user_classes', (req, res) => {
+router.post('/:id/user_classes', (req, res) => {
   dbFun.addClassByUserId(req.params.id, req.body)
     .then(result => {
       res.status(201).json({ message: 'success', result });
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({ message: 'sorry something is wrong with the server' });
+      res.status(500).json({ message: 'sorry something is wrong with the server', err });
     });
 });
 module.exports = router;
