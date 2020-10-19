@@ -36,6 +36,21 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// get class by any column/key
+router.get('/:key/:value', (req, res) => {
+    dbFun.getClassesBy(req.params.key, req.params.value)
+    .then(activity => {
+        if (activity) {
+          res.status(200).json(activity);
+        } else {
+          res.status(401).json({ message: 'Sorry, no classes found with these parameters' });
+        }
+      })
+      .catch(error => {
+        res.status(500).json(error);
+      });
+})
+
 // POST --> add a new class
 router.post('/', (req, res) => {
   const newClass = req.body;

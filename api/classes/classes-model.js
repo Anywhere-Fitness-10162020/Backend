@@ -5,11 +5,12 @@ const db = require("../../database/connection");
 module.exports = {
   getClasses,
   getClassById,
+  getClassesBy,
   addClass,
   updateClass,
   deleteClass,
   getClassByUserId,
-  addClassByUserId,
+//   addClassByUserId,
 };
 
 //getClasses --> get a list of all 'classes' --> from endpoint --> /api/classes
@@ -20,6 +21,11 @@ function getClasses() {
 //getClassById --> gets a list a single 'class' by 'id' --> from endpoint --> /api/classes/:id
 function getClassById(id) {
   return db("classes").where("id", id).first();
+}
+
+// get class by any column/key
+function getClassesBy(column, value){
+    return db("classes").where(`${column}`, value)
 }
 
 //create new class
