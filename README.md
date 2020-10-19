@@ -48,7 +48,11 @@ send request body:
     "password": "1234"
 }
 ```
-Not functioning yet
+recieve response body:
+{
+    "message": "Welcome Sam. Thanks for being an client today! ",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxOCwidXNlcm5hbWUiOiJTYW0iLCJyb2xlIjoiY2xpZW50IiwiaWF0IjoxNjAzMTE1OTU0LCJleHAiOjE2MDMyMDIzNTR9.sXu4S8uisRZ17v9_pk39FS8rzURPUDJ7-7Onnx9PR9w"
+}
 
 ---
 
