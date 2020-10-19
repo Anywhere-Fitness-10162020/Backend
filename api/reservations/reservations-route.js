@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   dbFun
-    .getClassByUserId(req.params.id)
+    .getReservations()
     .then((result) => {
       res.status(201).json(result);
     })
@@ -30,5 +30,18 @@ router.post("/", (req, res) => {
         .json({ message: "sorry something is wrong with the server", err });
     });
 });
+
+router.delete("/:id", (req, res) => {
+    dbFun.removeReservation(req.params.id)
+    .then((result) => {
+        res.status(201).json({ message: "success", result });
+      })
+      .catch((err) => {
+        console.log(err);
+        res
+          .status(500)
+          .json({ message: "sorry something is wrong with the server", err });
+      });
+})
 
 module.exports = router;

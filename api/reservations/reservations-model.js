@@ -2,7 +2,7 @@ const db = require("../../database/connection");
 
 module.exports = {
   createReservation,
-  getReservationBy,
+  getReservations,
   removeReservation
 };
 
@@ -17,11 +17,15 @@ async function createReservation(obj) {
 
 //Read
 
-function getReservationBy(column, value) {
-  return db("reservations").where(column, value);
+function getReservations() {
+  return db("attendees")
 }
+
+// function getReservationBy(column, value) {
+//   return db("reservations").where(column, value);
+// }
 
 //Delete
 function removeReservation(id) {
-    return db("reservations").where({ id }).del()
+    return db("attendees").where("id", id).del()
 }

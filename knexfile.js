@@ -7,7 +7,7 @@ module.exports = {
       filename: './database/fitness.db3'
     },
     migrations: {
-      directory: './migrations'
+      directory: './database/migrations'
     },
     seeds: {
       directory: './database/seeds'

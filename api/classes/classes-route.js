@@ -36,7 +36,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// get class by any column/key
+// get for searching classes by any column/key
 router.get('/:key/:value', (req, res) => {
     dbFun.getClassesBy(req.params.key, req.params.value)
     .then(activity => {
@@ -66,7 +66,7 @@ router.post('/', (req, res) => {
     })
     .catch(error => {
       console.log('inside addClass error', error);
-      res.status(500).json({ message: 'Sorry, no new class create on the server', error });
+      res.status(500).json({ message: 'Sorry, no new class created inn the database', error });
     });
 });
 
@@ -84,7 +84,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-// DELETe a Class
+// DELETE a Class
 
 router.delete('/:id', (req, res) => {
   const deletedID = req.params.id;
