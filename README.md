@@ -65,35 +65,31 @@ recieve response body:
 send request body:
 ```json
 {
-"class_name": "CON BODY",
-"class_duration": "1 hour",
-"class_intensity_level": "High",
-"class_city": "New York",
-"class_date": "October 20, 2020",
-"start_time": "7 am",
-"class_timezone": "Eastern",
-"type": "Body Weight",
-"attendees": 0,
-"max_attendees": 30,
-"instructor_id": 4
+  "class_name": "Rock Climbing",
+  "type": "Adventure",
+  "start_time": "2020-10-21 09:00:00",
+  "class_intensity_level": "high",
+  "class_city": "Yosemite",
+  "attendee_count": 0,
+  "max_attendees": 30,
+  "class_duration": "03:00:00",
+  "class_timezone": null
 }
 ```
 
 Recieve response:
 ```json
 {
-    "id": 13,
-    "class_name": "CON BODY",
-    "class_duration": "1 hour",
-    "class_intensity_level": "High",
-    "class_city": "New York",
-    "class_date": "October 20, 2020",
-    "start_time": "7 am",
-    "class_timezone": "Eastern",
-    "type": "Body Weight",
-    "attendees": 0,
+    "id": 11,
+    "class_name": "Rock Climbing",
+    "type": "Adventure",
+    "start_time": "2020-10-21 09:00:00",
+    "class_intensity_level": "high",
+    "class_city": "Yosemite",
+    "attendee_count": 0,
     "max_attendees": 30,
-    "instructor_id": 4
+    "class_duration": "03:00:00",
+    "class_timezone": null
 }
 ```
 
@@ -102,32 +98,42 @@ Recieve response:
 returns array of all classes
 ```json
 [
-{
-"id": 1,
-"class_name": "yoga at sunrise",
-"class_duration": "45 minutes",
-"class_intensity_level": "low",
-"class_city": "San Francisco",
-"class_date": "February 15, 2020",
-"start_time": "7am",
-"class_timezone": null,
-"type": "general",
-"attendees": 0,
-"max_attendees": 1
-},
-{
-"id": 2,
-"class_name": "running the hills of san fran",
-"class_duration": "1.5 hours",
-"class_intensity_level": "high",
-"class_city": "San Francisco",
-"class_date": "February 16, 2020",
-"start_time": "6am",
-"class_timezone": null,
-"type": "general",
-"attendees": 0,
-"max_attendees": 1
-},
+    {
+        "id": 1,
+        "class_name": "yoga at sunrise",
+        "type": "yoga",
+        "start_time": "2020-10-21 09:00:00",
+        "class_intensity_level": "low",
+        "class_city": "San Francisco",
+        "attendee_count": 0,
+        "max_attendees": 30,
+        "class_duration": "00:45:00",
+        "class_timezone": null
+    },
+    {
+        "id": 2,
+        "class_name": "running the hills of san fran",
+        "type": "running",
+        "start_time": "2020-10-22 09:00:00",
+        "class_intensity_level": "high",
+        "class_city": "San Francisco",
+        "attendee_count": 0,
+        "max_attendees": 30,
+        "class_duration": "01:30:00",
+        "class_timezone": null
+    },
+    {
+        "id": 3,
+        "class_name": "mma beginner training",
+        "type": "martial arts",
+        "start_time": "2020-10-23 15:30:00",
+        "class_intensity_level": "medium",
+        "class_city": "Los Angeles",
+        "attendee_count": 0,
+        "max_attendees": 30,
+        "class_duration": "02:00:00",
+        "class_timezone": null
+    }
 ]
 ```
 
@@ -135,19 +141,20 @@ returns array of all classes
 
 ---
 returns a class with the given id
+```json
 {
-"id": 1,
-"class_name": "yoga at sunrise",
-"class_duration": "45 minutes",
-"class_intensity_level": "low",
-"class_city": "San Francisco",
-"class_date": "February 15, 2020",
-"start_time": "7am",
-"class_timezone": null,
-"type": "general",
-"attendees": 0,
-"max_attendees": 1
+    "id": 11,
+    "class_name": "Rock Climbing",
+    "type": "Adventure",
+    "start_time": "2020-10-21 09:00:00",
+    "class_intensity_level": "high",
+    "class_city": "Yosemite",
+    "attendee_count": 0,
+    "max_attendees": 30,
+    "class_duration": "03:00:00",
+    "class_timezone": null
 }
+```
 
 ## PUT api/classes/:id
 
@@ -156,35 +163,32 @@ returns a class with the given id
 Send request body with modified version of an existing class:
 ``` json
 {
-    "class_name": "CON BODY",
-    "class_duration": "45 minutes",
-    "class_intensity_level": "High",
-    "class_city": "New York",
-    "class_date": "October 20, 2020",
-    "start_time": "7 am",
-    "class_timezone": "Eastern",
-    "type": "Body Weight",
-    "attendees": 0,
+    "id": 11,
+    "class_name": "Rock Climbing",
+    "type": "Adventure",
+    "start_time": "2020-10-21 09:00:00",
+    "class_intensity_level": "high",
+    "class_city": "Yosemite",
+    "attendee_count": 0,
     "max_attendees": 30,
-    "instructor_id": 4
+    "class_duration": "03:00:00",
+    "class_timezone": null
 }
 ```
 
 Recieve updated object in response:
 ```json
 {
-    "id": 13,
-    "class_name": "CON BODY",
-    "class_duration": "45 minutes",
-    "class_intensity_level": "High",
-    "class_city": "New York",
-    "class_date": "October 20, 2020",
-    "start_time": "7 am",
-    "class_timezone": "Eastern",
-    "type": "Body Weight",
-    "attendees": 0,
+    "id": 11,
+    "class_name": "Rock Climbing",
+    "type": "Adventure",
+    "start_time": "2020-10-21 09:00:00",
+    "class_intensity_level": "high",
+    "class_city": "Yosemite",
+    "attendee_count": 0,
     "max_attendees": 30,
-    "instructor_id": 4
+    "class_duration": "03:00:00",
+    "class_timezone": null
 }
 ```
 
@@ -266,21 +270,19 @@ Sends back an array of all classes that the user with that id has a reservation 
 [
     {
         "class_name": "yoga at sunrise",
-        "username": "Liam",
+        "username": "Todd",
         "class_city": "San Francisco",
-        "start_time": "7am",
-        "class_duration": "45 minutes",
-        "user_id": 2,
-        "class_date": "February 15, 2020"
+        "start_time": "2020-10-21 09:00:00",
+        "class_duration": "00:45:00",
+        "user_id": 1
     },
     {
-        "class_name": "brazialian jui jitsu white to blue belt rolling practice",
-        "username": "Liam",
-        "class_city": "Miami",
-        "start_time": "1pm",
-        "class_duration": "3 hours",
-        "user_id": 2,
-        "class_date": "February 18, 2020"
+        "class_name": "running the hills of san fran",
+        "username": "Todd",
+        "class_city": "San Francisco",
+        "start_time": "2020-10-22 09:00:00",
+        "class_duration": "01:30:00",
+        "user_id": 1
     }
 ]
 ```

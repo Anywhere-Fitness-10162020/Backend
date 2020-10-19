@@ -63,8 +63,7 @@ function getClassByUserId(userid) {
       "c.class_city",
       "c.start_time",
       "class_duration",
-      "u.id as user_id",
-      "class_date"
+      "u.id as user_id"
     )
     .where("u.id", userid);
 }
