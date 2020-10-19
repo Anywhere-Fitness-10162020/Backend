@@ -4,10 +4,6 @@ const dbFun = require("./classes-model");
 
 const router = express.Router();
 
-//CRUD
-//Create
-
-
 //getClasses --> get a list of all 'classes' --> from endpoint --> /api/classes
 router.get('/', (req, res) => {
   dbFun.getClasses()
@@ -40,6 +36,21 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// get for searching classes by any column/key
+router.get('/:key/:value', (req, res) => {
+    dbFun.getClassesBy(req.params.key, req.params.value)
+    .then(activity => {
+        if (activity) {
+          res.status(200).json(activity);
+        } else {
+          res.status(401).json({ message: 'Sorry, no classes found with these parameters' });
+        }
+      })
+      .catch(error => {
+        res.status(500).json(error);
+      });
+})
+
 // POST --> add a new class
 router.post('/', (req, res) => {
   const newClass = req.body;
@@ -55,7 +66,7 @@ router.post('/', (req, res) => {
     })
     .catch(error => {
       console.log('inside addClass error', error);
-      res.status(500).json({ message: 'Sorry, no new class create on the server', error });
+      res.status(500).json({ message: 'Sorry, no new class created inn the database', error });
     });
 });
 
@@ -73,7 +84,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-// DELETe a Class
+// DELETE a Class
 
 router.delete('/:id', (req, res) => {
   const deletedID = req.params.id;
@@ -87,27 +98,29 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-// GET CLASSS BY USER ID
+// // GET CLASSS BY USER ID 
 
-router.get('/:id/user_classes', (req, res) => {
-  dbFun.getClassByUserId(req.params.id)
-    .then(result => {
-      res.status(201).json(result);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ message: 'sorry something is wrong with the server' });
-    });
-});
+// replaced by endpoint in users to make the url structures easier for the frontend team to understand
+// router.get('/:id/user_classes', (req, res) => {
+//   dbFun.getClassByUserId(req.params.id)
+//     .then(result => {
+//       res.status(201).json(result);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json({ message: 'sorry something is wrong with the server' });
+//     });
+// });
 
-router.post('/user_classes', (req, res) => {
-  dbFun.addClassByUserId(req.params.id, req.body)
-    .then(result => {
-      res.status(201).json({ message: 'success', result });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ message: 'sorry something is wrong with the server' });
-    });
-});
+// replaced by endpoint in reservations to make easier to use and understand
+// router.post('/:id/user_classes', (req, res) => {
+//   dbFun.addClassByUserId(req.params.id, req.body)
+//     .then(result => {
+//       res.status(201).json({ message: 'success', result });
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json({ message: 'sorry something is wrong with the server', err });
+//     });
+// });
 module.exports = router;

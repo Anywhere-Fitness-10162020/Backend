@@ -2,7 +2,7 @@ const db = require("../../database/connection");
 
 module.exports = {
   addUser,
-  createUser,
+  // createUser,
   getUsers,
   getUserBy,
   getUserById,
@@ -13,15 +13,17 @@ module.exports = {
 
 //CRUD
 //Create
-function addUser(user) {
-  return db('users')
-    .insert(user, 'id')
-}
-
-async function createUser(obj) {
-  const id = await db("users").insert(obj);
+async function addUser(user) {
+  // return db('users')
+  //   .insert(user, 'id')
+  const id = await db("users").insert(user);
   return getUserBy("id", id[0]);
 }
+
+// async function createUser(obj) {
+//   const id = await db("users").insert(obj);
+//   return getUserBy("id", id[0]);
+// }
 
 //Read
 
@@ -39,9 +41,9 @@ function getUserById(id) {
     .first();
 }
 //same as above? 
-function findBy(user) {
+function findBy(username) {
   return db('users')
-    .where('username', user)
+    .where('username', username)
     .first();
 }
 //update
