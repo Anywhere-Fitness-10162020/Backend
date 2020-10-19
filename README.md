@@ -40,12 +40,6 @@ recieve response body of:
 ---
 ## Login
 ---
-<<<<<<< HEAD
-To log in use the following steps in order:
-
-__NOTE:__ You can NOT login a user without registering a user first. This is only true for the initial login / registration of a new user. Existing users can login. Failing to do so may or may not result in an error..
-=======
->>>>>>> 6bd84a59561779a3f6b858fc2113b093128ec9d6
 
 send request body:
 ```json
@@ -54,7 +48,11 @@ send request body:
     "password": "1234"
 }
 ```
-Not functioning yet
+recieve response body:
+{
+    "message": "Welcome Sam. Thanks for being an client today! ",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxOCwidXNlcm5hbWUiOiJTYW0iLCJyb2xlIjoiY2xpZW50IiwiaWF0IjoxNjAzMTE1OTU0LCJleHAiOjE2MDMyMDIzNTR9.sXu4S8uisRZ17v9_pk39FS8rzURPUDJ7-7Onnx9PR9w"
+}
 
 ---
 
