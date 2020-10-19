@@ -18,7 +18,6 @@ server.use('/api/classes', classesRoute);
 server.use('/api/reservations', reservationsRoute)
 server.use('/api/auth', authenticationRouter)
 
-
 //Sanity Check
 server.get("/", (req, res) => {
     res.status(200).json({api: "running" });

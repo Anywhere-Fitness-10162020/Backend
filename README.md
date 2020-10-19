@@ -91,6 +91,8 @@ Removes an existing reservation:
 
 ## To do:
 -setup reservations endpoints
+-move getClassByUserId to users router as that make more sense from url structure perspective
+-get rid of addClassByUserId as that is now createReservation
 -documentation for each endpoint
 -ability for to search by 
   - `class time`

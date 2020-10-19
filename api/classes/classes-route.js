@@ -83,27 +83,29 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-// GET CLASSS BY USER ID
+// // GET CLASSS BY USER ID 
 
-router.get('/:id/user_classes', (req, res) => {
-  dbFun.getClassByUserId(req.params.id)
-    .then(result => {
-      res.status(201).json(result);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ message: 'sorry something is wrong with the server' });
-    });
-});
+// replaced by endpoint in users to make the url structures easier for the frontend team to understand
+// router.get('/:id/user_classes', (req, res) => {
+//   dbFun.getClassByUserId(req.params.id)
+//     .then(result => {
+//       res.status(201).json(result);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json({ message: 'sorry something is wrong with the server' });
+//     });
+// });
 
-router.post('/:id/user_classes', (req, res) => {
-  dbFun.addClassByUserId(req.params.id, req.body)
-    .then(result => {
-      res.status(201).json({ message: 'success', result });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ message: 'sorry something is wrong with the server', err });
-    });
-});
+// replaced by endpoint in reservations to make easier to use and understand
+// router.post('/:id/user_classes', (req, res) => {
+//   dbFun.addClassByUserId(req.params.id, req.body)
+//     .then(result => {
+//       res.status(201).json({ message: 'success', result });
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json({ message: 'sorry something is wrong with the server', err });
+//     });
+// });
 module.exports = router;

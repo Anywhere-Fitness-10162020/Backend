@@ -63,10 +63,11 @@ function getClassByUserId(userid) {
     .where("u.id", userid);
 }
 
-function addClassByUserId(userid, classidObj) {
-  const newAttendeeObj = {
-    user_id: userid,
-    class_id: classidObj.class_id,
-  };
-  return db("attendees").insert(newAttendeeObj)
-}
+// deprecated - replaced by create reservation in reservations-model.js
+// function addClassByUserId(userid, classidObj) {
+//   const newAttendeeObj = {
+//     user_id: userid,
+//     class_id: classidObj.class_id,
+//   };
+//   return db("attendees").insert(newAttendeeObj)
+// }
