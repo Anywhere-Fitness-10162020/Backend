@@ -5,9 +5,6 @@ const middleware = require('../middleware/middleware')
 const Users = require('../users/users-model')
 const router = express.Router()
 
-
-
-
 router.post('/register', middleware.verifyRegister, async(req, res) => {
   try {
   

@@ -10,8 +10,9 @@ module.exports = {
 //Create
 
 async function createReservation(obj) {
-  const id = await db("reservations").insert(obj);
-  return getClassBy("id", id[0]);
+  return db("attendees").insert(obj);
+  // const id = await db("attendees").insert(obj);
+  // return getReservationBy("id", id[0]);
 }
 
 //Read

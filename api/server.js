@@ -6,7 +6,6 @@ require('dotenv').config()
 const usersRoute = require('./users/users-route')
 const classesRoute = require('./classes/classes-route')
 const authenticationRouter = require('./auth/authenticationRouter')
-
 const reservationsRoute = require('./reservations/reservations-route')
 
 
@@ -16,9 +15,8 @@ server.use(express.json());
 
 server.use('/api/users', usersRoute);
 server.use('/api/classes', classesRoute);
+server.use('/api/reservations', reservationsRoute)
 server.use('/api/auth', authenticationRouter)
-
-server.use('/api/reservations', reservationsRoute);
 
 
 //Sanity Check
