@@ -28,7 +28,7 @@
 ---
 To log in use the following steps in order:
 
-__NOTE:__ You can NOT login a user without registering a user first. This is only true for the initial login / registration of a new user. Existing users can login. Failing to do so may or may not result in an error.
+__NOTE:__ You can NOT login a user without registering a user first. This is only true for the initial login / registration of a new user. Existing users can login. Failing to do so may or may not result in an error..
 
 1. To Login you will need to send a request to the API with the login data.
    * The data should be _JSON_ data with the following shape:
