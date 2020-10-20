@@ -9,11 +9,15 @@ router.post("/register", middleware.verifyRegister, async (req, res) => {
   try {
     const newUser = req.body;
     const { password } = newUser;
-
+    const instructorCode = 'instructor2020'
     const hash = bcrypt.hashSync(password, 10);
-  
-    const savedUser = await Users.addUser({...newUser, password: hash})
+  if (newUser.role === instructorCode) {
+    const savedUser = await Users.addUser({...newUser, password: hash, role: 'instructor'})
+    res.status(200).json({message: 'new instructor user created'})
+  } else {
+    Users.addUser({...newUser, password: hash, role: 'attendee'})
     res.status(200).json({message: 'new user created'})
+  }
   } catch(error) {
           console.log('inside authRouter error', error);
           res.status(500).json({ message: 'Error creating new user', error });
