@@ -36,7 +36,16 @@ recieve response body of:
     ]
 }
 ```
-
+---
+create instructor user
+```json
+{
+    "username": "Sam",
+    "email": "Sam@gmail.com",
+    "password": "1234",
+    "role": "instructor2020"
+}
+```
 ---
 ## Login
 ---
