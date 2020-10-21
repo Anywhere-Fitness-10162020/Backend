@@ -1,11 +1,11 @@
 const express = require("express");
-const server = require("../server");
 const dbFun = require("./classes-model");
+const { clientLoggedIn } = require("../auth/restrictedMiddleware")
 
 const router = express.Router();
 
 //getClasses --> get a list of all 'classes' --> from endpoint --> /api/classes
-router.get('/', (req, res) => {
+router.get('/', clientLoggedIn, (req, res) => {
   dbFun.getClasses()
     .then(activity => {
       console.log('inside getClasses', activity);
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 });
 
 //getClassById --> gets a list a single 'class' by 'id' --> from endpoint --> /api/classes/:id
-router.get('/:id', (req, res) => {
+router.get('/:id', clientLoggedIn, (req, res) => {
   const classId = req.params.id;
 
   dbFun.getClassById(classId)

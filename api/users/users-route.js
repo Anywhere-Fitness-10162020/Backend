@@ -1,9 +1,7 @@
 const express = require("express");
-const dbFun = require("./users-model");
-const restricted = require('../auth/restrictedMiddleware');
+const { clientLoggedIn } = require("../auth/restrictedMiddleware")
 const Users = require('./users-model');
 const Classes =require('../classes/classes-model')
-const restrictedMiddleware = require("../auth/restrictedMiddleware");
 const router = express.Router();
 
 module.exports = router;
@@ -58,7 +56,7 @@ router.get('/:id/reservations', (req, res) => {
 
 // PUT(Update user)
 
-router.put('/:id', restrictedMiddleware, (req, res) => {
+router.put('/:id', clientLoggedIn, (req, res) => {
   Users.updateUser(req.params.id, req.body)
     .then(user => {
       console.log(req.body);
