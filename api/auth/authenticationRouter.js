@@ -52,19 +52,6 @@ router.post("/register", middleware.verifyRegister, async (req, res) => {
         }
   
     });
- 
-  function signToken(user) {
-    const payload = {
-      user
-    };
-  
-    const options = {
-      expiresIn: '1d'
-    };
-  
-    console.log(process.env.JWT_SECRET)
-    return jwt.sign(payload, process.env.JWT_SECRET, options);
-  };
 
 function signToken(user) {
   const payload = {
