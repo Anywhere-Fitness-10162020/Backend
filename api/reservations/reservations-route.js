@@ -19,8 +19,12 @@ router.get("/", instructorLoggedIn, (req, res) => {
 });
 
 router.post("/", clientLoggedIn, (req, res) => {
+  const reservation = {
+    user_id: req.user_id,
+    class_id: req.body.class_id
+  }
   dbFun
-    .createReservation(req.body)
+    .createReservation(reservation)
     .then((result) => {
       res.status(201).json({ message: "success", result });
     })

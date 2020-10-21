@@ -13,6 +13,7 @@ function clientLoggedIn (req, res, next) {
             if(err){
                 res.status(401).json({err: 'you dont have access'})
             } else {
+                req.user_id = decoded.subject;
                 next()
             }
         })
@@ -30,6 +31,7 @@ function instructorLoggedIn (req, res, next) {
                 res.status(401).json({err: 'you dont have access'})
             } else {
                 if (decoded.role === 'instructor') {
+                    req.user_id = decoded.subject;
                     next()
                 } else {
                     res.status(401).json({err: 'Must be logged in as an instructor to access this endpoint'})
