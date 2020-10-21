@@ -1,9 +1,10 @@
 const express = require("express");
 const dbFun = require("./reservations-model");
+const { clientLoggedIn, instructorLoggedIn } = require("../auth/restrictedMiddleware");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/", instructorLoggedIn, (req, res) => {
   dbFun
     .getReservations()
     .then((result) => {
@@ -17,7 +18,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
+router.post("/", clientLoggedIn, (req, res) => {
   dbFun
     .createReservation(req.body)
     .then((result) => {
@@ -31,7 +32,7 @@ router.post("/", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", clientLoggedIn, (req, res) => {
     dbFun.removeReservation(req.params.id)
     .then((result) => {
         res.status(201).json({ message: "success", result });

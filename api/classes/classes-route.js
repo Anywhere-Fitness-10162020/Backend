@@ -1,6 +1,6 @@
 const express = require("express");
 const dbFun = require("./classes-model");
-const { clientLoggedIn, instructorLoggedIn } = require("../auth/restrictedMiddleware")
+const { clientLoggedIn, instructorLoggedIn } = require("../auth/restrictedMiddleware");
 
 const router = express.Router();
 
@@ -73,7 +73,7 @@ router.post('/', instructorLoggedIn, (req, res) => {
 
 //PUT Update Class
 
-router.put('/:id', (req, res) => {
+router.put('/:id', instructorLoggedIn, (req, res) => {
   dbFun.updateClass(req.params.id, req.body)
     .then(item => {
       console.log(req.body)
@@ -87,7 +87,7 @@ router.put('/:id', (req, res) => {
 
 // DELETE a Class
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', instructorLoggedIn, (req, res) => {
   const deletedID = req.params.id;
   dbFun.deleteClass(deletedID)
     .then(result => {
