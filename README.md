@@ -11,6 +11,7 @@ should get response that looks like this:
 
 ### Register /api/auth/register
 ---
+
 Send request body like:
 ```json
 {
@@ -68,6 +69,8 @@ recieve response body:
 ---
 
 ### POST api/classes
+---
+
 Requires Authorization header with instructor JSON Web Token
 send request body:
 ```json
@@ -203,8 +206,8 @@ Recieve updated object in response:
 ```
 
 ### DELETE /:id
-
 ---
+
 Requires Authorization header with instructor JSON Web Token
 Send to remove an existing class.
 Recieve message in response:
@@ -212,10 +215,7 @@ Recieve message in response:
 "class id 13 was deleted"
 ```
 
----
-
 ## Reservations
-
 ---
 
 ### GET /api/reservations
@@ -262,7 +262,6 @@ Recieve response body:
 ```
 
 ### DELETE /:id
-
 ---
 
 Removes an existing reservation and sends response of:
@@ -273,33 +272,30 @@ Removes an existing reservation and sends response of:
 }
 ```
 
----
 ## Users
 ---
+
 ### GET api/users/:id/reservations
+---
+
+Requires Authorization header with client or instructor JSON Web Token
 Sends back an array of all classes that the user with that id has a reservation for:
 ```json
 [
     {
-        "class_name": "yoga at sunrise",
-        "username": "Todd",
-        "class_city": "San Francisco",
-        "start_time": "2020-10-21 09:00:00",
-        "class_duration": "00:45:00",
-        "user_id": 1
-    },
-    {
-        "class_name": "running the hills of san fran",
-        "username": "Todd",
-        "class_city": "San Francisco",
-        "start_time": "2020-10-22 09:00:00",
-        "class_duration": "01:30:00",
-        "user_id": 1
+        "class_name": "Skydiving",
+        "type": "adventure",
+        "start_time": "2020-10-18 06:00:00",
+        "class_intensity_level": "low",
+        "class_city": "Knoxville",
+        "class_duration": "01:00:00",
+        "username": "Sam",
+        "user_id": 16
     }
 ]
 ```
 
-
+-----
 ## To do:
 
 x setup make reservation endpoint
