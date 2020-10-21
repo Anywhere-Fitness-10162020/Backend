@@ -42,7 +42,7 @@ router.post("/register", middleware.verifyRegister, async (req, res) => {
   
       if (persistedUser && bcrypt.compareSync(password, persistedUser.password)) {
   const token = signToken(persistedUser);
-     res.status(200).json({  message: `Welcome ${persistedUser.username}. Thanks for being an ${persistedUser.role} today! `, token })
+     res.status(200).json({  message: `Welcome ${persistedUser.username}. Thanks for being an ${persistedUser.role} today! `, token, role: persistedUser.role })
   
       }
       else {
