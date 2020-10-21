@@ -3,6 +3,7 @@ const db = require("../../database/connection");
 module.exports = {
   createReservation,
   getReservations,
+  getReservationById,
   removeReservation
 };
 
@@ -19,6 +20,10 @@ async function createReservation(obj) {
 
 function getReservations() {
   return db("attendees")
+}
+
+function getReservationById(id) {
+  return db("attendees").where("id", id)
 }
 
 // function getReservationBy(column, value) {
