@@ -62,30 +62,30 @@ router.get('/:id/reservations', clientLoggedIn, (req, res) => {
 
 // PUT(Update user)
 
-router.put('/:id', clientLoggedIn, (req, res) => {
-  Users.updateUser(req.params.id, req.body)
-    .then(user => {
-      console.log(req.body);
-      res.status(201).json(user);
-    })
-    .catch(err => {
-      res.status(500).json({ error: ' something went wrong in the server' });
-    });
-});
+// router.put('/:id', clientLoggedIn, (req, res) => {
+//   Users.updateUser(req.params.id, req.body)
+//     .then(user => {
+//       console.log(req.body);
+//       res.status(201).json(user);
+//     })
+//     .catch(err => {
+//       res.status(500).json({ error: ' something went wrong in the server' });
+//     });
+// });
 
 //DELETE User
 
-router.delete('/:id', (req, res) => {
-  const deletedId = req.params.id;
+// router.delete('/:id', (req, res) => {
+//   const deletedId = req.params.id;
 
-  Users.deleteUser(deletedId)
-    .then(user => {
-      res.status(200).json(`id ${deletedId} was deleted`);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ message: 'error with the server' });
-    });
-});
+//   Users.deleteUser(deletedId)
+//     .then(user => {
+//       res.status(200).json(`id ${deletedId} was deleted`);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json({ message: 'error with the server' });
+//     });
+// });
 
 module.exports = router;
