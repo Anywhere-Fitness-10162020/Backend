@@ -1,6 +1,6 @@
 const express = require("express");
 const dbFun = require("./classes-model");
-const { clientLoggedIn } = require("../auth/restrictedMiddleware")
+const { clientLoggedIn, instructorLoggedIn } = require("../auth/restrictedMiddleware")
 
 const router = express.Router();
 
@@ -36,8 +36,9 @@ router.get('/:id', clientLoggedIn, (req, res) => {
     });
 });
 
-// get for searching classes by any column/key
-router.get('/:key/:value', (req, res) => {
+// get for searching classes by any column/key - won't work most cases because you can't have spaces in URL
+// Not necessary because searching will be done faster with a filter() method on the frontend
+router.get('/:key/:value', clientLoggedIn, (req, res) => {
     dbFun.getClassesBy(req.params.key, req.params.value)
     .then(activity => {
         if (activity) {
@@ -52,7 +53,7 @@ router.get('/:key/:value', (req, res) => {
 })
 
 // POST --> add a new class
-router.post('/', (req, res) => {
+router.post('/', instructorLoggedIn, (req, res) => {
   const newClass = req.body;
 
   dbFun.addClass(newClass)

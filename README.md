@@ -1,14 +1,15 @@
-### Anywhere Fitness App
+# Anywhere Fitness App
+---------
 
-## GET
+### GET
+---
 
 API URL: https://anywherefitnesswebapi.herokuapp.com/
 
 should get response that looks like this:
 {"api":"running"}
 
-## Register /api/auth/register
-
+### Register /api/auth/register
 ---
 Send request body like:
 ```json
@@ -36,8 +37,8 @@ recieve response body of:
     ]
 }
 ```
----
-create instructor user
+
+create instructor user:
 ```json
 {
     "username": "Sam",
@@ -46,8 +47,8 @@ create instructor user
     "role": "instructor2020"
 }
 ```
----
-## Login
+
+### Login
 ---
 
 send request body:
@@ -63,14 +64,11 @@ recieve response body:
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxOCwidXNlcm5hbWUiOiJTYW0iLCJyb2xlIjoiY2xpZW50IiwiaWF0IjoxNjAzMTE1OTU0LCJleHAiOjE2MDMyMDIzNTR9.sXu4S8uisRZ17v9_pk39FS8rzURPUDJ7-7Onnx9PR9w"
 }
 
----
-
 ## Classes
-
 ---
 
-## POST api/classes
-
+### POST api/classes
+Requires Authorization header with instructor JWT token
 send request body:
 ```json
 {
@@ -102,8 +100,10 @@ Recieve response:
 }
 ```
 
-## GET api/classes/
+### GET api/classes/
+---
 
+Requires Authorization header with client or instructor JWT token
 returns array of all classes
 ```json
 [
@@ -146,9 +146,10 @@ returns array of all classes
 ]
 ```
 
-## GET api/classes/:id
-
+### GET api/classes/:id
 ---
+
+Requires Authorization header with client or instructor JWT token
 returns a class with the given id
 ```json
 {
@@ -165,10 +166,10 @@ returns a class with the given id
 }
 ```
 
-## PUT api/classes/:id
-
+### PUT api/classes/:id
 ---
 
+Requires Authorization header with instructor JWT token
 Send request body with modified version of an existing class:
 ``` json
 {
@@ -201,10 +202,10 @@ Recieve updated object in response:
 }
 ```
 
-## DELETE /:id
+### DELETE /:id
 
 ---
-
+Requires Authorization header with instructor JWT token
 Send to remove an existing class.
 Recieve message in response:
 ```json
@@ -217,7 +218,7 @@ Recieve message in response:
 
 ---
 
-## GET /api/reservations
+### GET /api/reservations
 ---
 
 get an array of all reservations.
@@ -237,7 +238,7 @@ Shortened example response body:
 ]
 ```
 
-## Post /api/reservations
+### Post /api/reservations
 ---
 Send request body:
 ```json
@@ -258,7 +259,7 @@ Recieve response body:
 }
 ```
 
-## DELETE /:id
+### DELETE /:id
 
 ---
 
@@ -273,7 +274,7 @@ Removes an existing reservation and sends response of:
 ---
 ## Users
 ---
-## GET api/users/:id/reservations
+### GET api/users/:id/reservations
 Sends back an array of all classes that the user with that id has a reservation for:
 ```json
 [
@@ -303,8 +304,8 @@ x setup make reservation endpoint
 x move getClassByUserId to users router as that make more sense from url structure perspective
 x get rid of addClassByUserId as that is now createReservation
 x add instructor_id to classes table
-- documentation for each endpoint
-- instructors need to only be able to register their account if they have an auth code
+x documentation for each endpoint
+x instructors need to only be able to register their account if they have an auth code
   x ability for to search by
   - `class time`
   - `class date`
@@ -313,4 +314,5 @@ x add instructor_id to classes table
   - `intensity level`
   - `class location`
   - This may not be necessary. It would be a better user experience if the classes page just displayed a card for every item in an array of all the classes, recieved from the basic classes get request. Then the could search without having to ping the backend, it would all be instant on the frontend. Made the endpoint just in case.
+- Authentication and Authorization
 - tests
