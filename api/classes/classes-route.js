@@ -1,11 +1,11 @@
 const express = require("express");
-const server = require("../server");
 const dbFun = require("./classes-model");
+const { clientLoggedIn, instructorLoggedIn } = require("../auth/restrictedMiddleware");
 
 const router = express.Router();
 
 //getClasses --> get a list of all 'classes' --> from endpoint --> /api/classes
-router.get('/', (req, res) => {
+router.get('/', clientLoggedIn, (req, res) => {
   dbFun.getClasses()
     .then(activity => {
       console.log('inside getClasses', activity);
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 });
 
 //getClassById --> gets a list a single 'class' by 'id' --> from endpoint --> /api/classes/:id
-router.get('/:id', (req, res) => {
+router.get('/:id', clientLoggedIn, (req, res) => {
   const classId = req.params.id;
 
   dbFun.getClassById(classId)
@@ -36,8 +36,9 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// get for searching classes by any column/key
-router.get('/:key/:value', (req, res) => {
+// get for searching classes by any column/key - won't work most cases because you can't have spaces in URL
+// Not necessary because searching will be done faster with a filter() method on the frontend
+router.get('/:key/:value', clientLoggedIn, (req, res) => {
     dbFun.getClassesBy(req.params.key, req.params.value)
     .then(activity => {
         if (activity) {
@@ -52,7 +53,7 @@ router.get('/:key/:value', (req, res) => {
 })
 
 // POST --> add a new class
-router.post('/', (req, res) => {
+router.post('/', instructorLoggedIn, (req, res) => {
   const newClass = req.body;
 
   dbFun.addClass(newClass)
@@ -72,7 +73,7 @@ router.post('/', (req, res) => {
 
 //PUT Update Class
 
-router.put('/:id', (req, res) => {
+router.put('/:id', instructorLoggedIn, (req, res) => {
   dbFun.updateClass(req.params.id, req.body)
     .then(item => {
       console.log(req.body)
@@ -86,7 +87,7 @@ router.put('/:id', (req, res) => {
 
 // DELETE a Class
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', instructorLoggedIn, (req, res) => {
   const deletedID = req.params.id;
   dbFun.deleteClass(deletedID)
     .then(result => {

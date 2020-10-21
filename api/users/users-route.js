@@ -1,9 +1,7 @@
 const express = require("express");
-const dbFun = require("./users-model");
-const restricted = require('../auth/restrictedMiddleware');
+const { clientLoggedIn, instructorLoggedIn } = require("../auth/restrictedMiddleware")
 const Users = require('./users-model');
 const Classes =require('../classes/classes-model')
-const restrictedMiddleware = require("../auth/restrictedMiddleware");
 const router = express.Router();
 
 module.exports = router;
@@ -45,43 +43,49 @@ router.get('/:id', (req, res) => {
 
 // GET CLASSES BY USER ID
 
-router.get('/:id/reservations', (req, res) => {
-    Classes.getClassByUserId(req.params.id)
+router.get('/:id/reservations', clientLoggedIn, (req, res) => {
+  console.log(req.user_id)
+  console.log(req.params.id)
+  if (req.user_id == req.params.id) {
+    Classes.getClassByUserId(req.user_id)
       .then(result => {
-        res.status(201).json(result);
+        res.status(200).json(result);
       })
       .catch(err => {
         console.log(err);
         res.status(500).json({ message: 'sorry something is wrong with the server' });
       });
+  } else {
+    res.status(401).json({ message: "you aren't logged in as that user. User_id must match the id parameter in the URL" });
+  }
   });
 
 // PUT(Update user)
 
-router.put('/:id', restrictedMiddleware, (req, res) => {
-  Users.updateUser(req.params.id, req.body)
-    .then(user => {
-      console.log(req.body);
-      res.status(201).json(user);
-    })
-    .catch(err => {
-      res.status(500).json({ error: ' something went wrong in the server' });
-    });
-});
+// router.put('/:id', clientLoggedIn, (req, res) => {
+//   Users.updateUser(req.params.id, req.body)
+//     .then(user => {
+//       console.log(req.body);
+//       res.status(201).json(user);
+//     })
+//     .catch(err => {
+//       res.status(500).json({ error: ' something went wrong in the server' });
+//     });
+// });
 
 //DELETE User
 
-router.delete('/:id', (req, res) => {
-  const deletedId = req.params.id;
+// router.delete('/:id', (req, res) => {
+//   const deletedId = req.params.id;
 
-  Users.deleteUser(deletedId)
-    .then(user => {
-      res.status(200).json(`id ${deletedId} was deleted`);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ message: 'error with the server' });
-    });
-});
+//   Users.deleteUser(deletedId)
+//     .then(user => {
+//       res.status(200).json(`id ${deletedId} was deleted`);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json({ message: 'error with the server' });
+//     });
+// });
 
 module.exports = router;
