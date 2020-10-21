@@ -54,18 +54,21 @@ function deleteClass(id) {
 }
 
 function getClassByUserId(userid) {
-  return db("classes as c")
-    .join("attendees as a", "c.id", "a.class_id")
-    .join("users as u", "u.id", "a.user_id")
+  return db("classes")
+    .join("attendees", "classes.id", '=', "attendees.class_id")
+    .join("users", "attendees.user_id", '=', "users.id" )
     .select(
-      "c.class_name",
-      "u.username",
-      "c.class_city",
-      "c.start_time",
-      "class_duration",
-      "u.id as user_id"
+      "classes.class_name",
+      "classes.type",
+      "classes.start_time",
+      "classes.class_intensity_level",
+      "classes.class_city",
+      "classes.class_duration",
+      "users.username",
+      "attendees.user_id"
     )
-    .where("u.id", userid);
+    .where("attendees.user_id", userid);
+    // return db("users").where("id", userid)
 }
 
 // deprecated - replaced by create reservation in reservations-model.js
