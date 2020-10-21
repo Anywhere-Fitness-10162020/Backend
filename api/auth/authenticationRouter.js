@@ -16,7 +16,12 @@ router.post("/register", middleware.verifyRegister, async (req, res) => {
     res.status(200).json({message: 'new instructor user created'})
   } else {
     Users.addUser({...newUser, password: hash, role: 'attendee'})
-    res.status(200).json({message: 'new user created'})
+    .then( userRes => {
+      res.status(200).json({message: 'new user created', userRes})
+    })
+    .catch( userErr => {
+      res.status(500).json({ message: 'this username or email is likely not unique', userErr })
+    })
   }
   } catch(error) {
           console.log('inside authRouter error', error);

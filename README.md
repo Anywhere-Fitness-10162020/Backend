@@ -295,6 +295,62 @@ Sends back an array of all classes that the user with that id has a reservation 
 ]
 ```
 
+## Punch Passes
+---
+### Create Punch Pass
+---
+#### POST api/pass
+
+Requires Authorization header with instructor JSON Web Token
+Send request body:
+```json
+{
+    "class_type": "running",
+    "max_punches": 5
+}
+```
+
+Recieve response:
+```json
+{
+    "id": 1,
+    "instructor_id": 1,
+    "class_type": "running",
+    "max_punches": 5
+}
+```
+
+#### GET api/pass
+
+Requires Authorization header with instructor JSON Web Token
+Recieve array of all punch passes
+
+#### PUT api/pass
+
+Requires Authorization header with instructor JSON Web Token
+Send request body:
+```json
+{
+    "id": 1,
+    "instructor_id": 1,
+    "class_type": "running",
+    "max_punches": 5
+}
+```
+
+Recieve response:
+```json
+{
+    "id": 1,
+    "instructor_id": 1,
+    "class_type": "running",
+    "max_punches": 10
+}
+```
+#### DELETE /api/pass/:id
+Delete if logged as instructor who made the pass
+
+
 -----
 ## To do:
 
@@ -304,13 +360,7 @@ x get rid of addClassByUserId as that is now createReservation
 x add instructor_id to classes table
 x documentation for each endpoint
 x instructors need to only be able to register their account if they have an auth code
-  x ability for to search by
-  - `class time`
-  - `class date`
-  - `class duration`
-  - `class type`
-  - `intensity level`
-  - `class location`
-  - This may not be necessary. It would be a better user experience if the classes page just displayed a card for every item in an array of all the classes, recieved from the basic classes get request. Then the could search without having to ping the backend, it would all be instant on the frontend. Made the endpoint just in case.
-- Authentication and Authorization
+x Authentication and Authorization
+- punch cards
+- attendence increments and decrements
 - tests
