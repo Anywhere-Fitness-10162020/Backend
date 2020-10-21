@@ -26,7 +26,7 @@ router.post("/", clientLoggedIn, (req, res) => {
   dbFun
     .createReservation(reservation)
     .then((result) => {
-      res.status(201).json({ message: "success", result });
+      res.status(201).json(`user_id: ${reservation.user_id} is now registered for class_id: ${reservation.class_id} reservation id is ${result}`);
     })
     .catch((err) => {
       console.log(err);

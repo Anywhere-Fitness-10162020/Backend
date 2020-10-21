@@ -68,7 +68,7 @@ recieve response body:
 ---
 
 ### POST api/classes
-Requires Authorization header with instructor JWT token
+Requires Authorization header with instructor JSON Web Token
 send request body:
 ```json
 {
@@ -103,7 +103,7 @@ Recieve response:
 ### GET api/classes/
 ---
 
-Requires Authorization header with client or instructor JWT token
+Requires Authorization header with client or instructor JSON Web Token
 returns array of all classes
 ```json
 [
@@ -149,7 +149,7 @@ returns array of all classes
 ### GET api/classes/:id
 ---
 
-Requires Authorization header with client or instructor JWT token
+Requires Authorization header with client or instructor JSON Web Token
 returns a class with the given id
 ```json
 {
@@ -169,7 +169,7 @@ returns a class with the given id
 ### PUT api/classes/:id
 ---
 
-Requires Authorization header with instructor JWT token
+Requires Authorization header with instructor JSON Web Token
 Send request body with modified version of an existing class:
 ``` json
 {
@@ -205,7 +205,7 @@ Recieve updated object in response:
 ### DELETE /:id
 
 ---
-Requires Authorization header with instructor JWT token
+Requires Authorization header with instructor JSON Web Token
 Send to remove an existing class.
 Recieve message in response:
 ```json
@@ -221,6 +221,7 @@ Recieve message in response:
 ### GET /api/reservations
 ---
 
+Requires Authorization header with instructor JSON Web Token
 get an array of all reservations.
 Shortened example response body:
 ```json
@@ -240,23 +241,24 @@ Shortened example response body:
 
 ### Post /api/reservations
 ---
-Send request body:
+
+Requires Authorization header with client or instructor JSON Web Token
+
+> [!NOTE]
+> This previously allowed a user to register another user for a class because the user_id was sent in the request body. Now the server retrieves the user_id from the JWT instead
+
+In this example user_id: 16 and the request header contains the JWT
+Sent request body:
 ```json
 {
-    "user_id": 11,
-    "class_id": 8
+    "class_id": 12
 }
 ```
 
 
 Recieve response body:
 ```json
-{
-    "message": "success",
-    "result": [
-        16
-    ]
-}
+"user_id: 16 is now registered for class_id: 12 reservation id is 12"
 ```
 
 ### DELETE /:id
