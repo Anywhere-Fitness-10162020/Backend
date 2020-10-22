@@ -27,8 +27,32 @@ async function checkExisting(incomingPunchObj) {
     }
 }
 
-function checkFreeClass() {
+async function checkIfPunchCardFull(incomingPunchObj) {
+    const { pass_id, user_id } = incomingPunchObj;
+    const passRecord = await db('passes').select('max_punches').where('id', pass_id)
+    const maxPunches = passRecord[0].max_punches
+    console.log(maxPunches)
 
+    const punchRecord = await db('punches').select('punch_count').where({ pass_id, user_id })
+    const punchCount = punchRecord[0].punch_count;
+    console.log(punchCount)
+
+    if (punchCount >= maxPunches) {
+        //toggle free_class to true
+        console.log('card full: free class to true')
+        return setFreeClassToTrue(incomingPunchObj)
+    } else {
+        return 'card not full: free_class stays false'
+        //end function and return 
+    }
+}
+
+async function setFreeClassToTrue(incomingPunchObj) {
+    const { pass_id, user_id } = incomingPunchObj;
+    
+    const oldCard = await getPunchById({ pass_id, user_id })
+    const newCard = {...oldCard, free_class: 1}
+    console.log(newCard)
 }
 
 function createPunch(incomingPunchObj) {
@@ -61,6 +85,13 @@ function incrementPunches(existingPunch) {
     .update(updatedPunch)
     .then( updateRes => {
         console.log("incremented successfully", updateRes)
+        checkIfPunchCardFull({ pass_id, user_id })
+        .then( checkRes => {
+            console.log('check if punch card full', checkRes)
+        })
+        .catch( checkErr => {
+            console.log(checkErr)
+        })
         return getPunchById({ pass_id, user_id })
     })
     .catch( updateErr => {
