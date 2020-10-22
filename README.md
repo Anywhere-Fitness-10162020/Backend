@@ -361,6 +361,7 @@ x add instructor_id to classes table
 x documentation for each endpoint
 x instructors need to only be able to register their account if they have an auth code
 x Authentication and Authorization
-- punch cards
-- attendence increments and decrements
+x punch passes
+x attendence punches/increments
+- don't allow registration if class is full
 - tests
