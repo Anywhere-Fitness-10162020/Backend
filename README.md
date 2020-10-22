@@ -297,9 +297,9 @@ Sends back an array of all classes that the user with that id has a reservation 
 
 ## Punch Passes
 ---
-### Create Punch Pass
+
+#### Create Punch Pass or POST api/pass
 ---
-#### POST api/pass
 
 Requires Authorization header with instructor JSON Web Token
 Send request body:
@@ -321,34 +321,34 @@ Recieve response:
 ```
 
 #### GET api/pass
+---
 
 Requires Authorization header with instructor JSON Web Token
 Recieve array of all punch passes
 
-#### PUT api/pass
+#### Create Punch Pass or POST api/pass
+---
 
 Requires Authorization header with instructor JSON Web Token
 Send request body:
 ```json
 {
-    "id": 1,
-    "instructor_id": 1,
-    "class_type": "running",
-    "max_punches": 5
+    "pass_id": 1,
+    "user_id": 
 }
 ```
 
 Recieve response:
 ```json
-{
-    "id": 1,
-    "instructor_id": 1,
-    "class_type": "running",
-    "max_punches": 10
-}
+[
+    {
+        "pass_id": 1,
+        "user_id": 1,
+        "punch_count": 1,
+        "free_class": 0
+    }
+]
 ```
-#### DELETE /api/pass/:id
-Delete if logged as instructor who made the pass
 
 
 -----
