@@ -56,11 +56,12 @@ function incrementPunches(existingPunch) {
 
     console.log(`updated`, updatedPunch)
 
-    db("punches")
+    return db("punches")
     .where({ pass_id, user_id })
     .update(updatedPunch)
     .then( updateRes => {
-        return "incremented successfully"
+        console.log("incremented successfully", updateRes)
+        return getPunchById({ pass_id, user_id })
     })
     .catch( updateErr => {
         return updateErr;
