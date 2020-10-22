@@ -51,12 +51,21 @@ async function setFreeClassToTrue(incomingPunchObj) {
     const { pass_id, user_id } = incomingPunchObj;
     
     const oldCard = await getPunchById({ pass_id, user_id })
-    const newCard = {...oldCard, free_class: 1}
-    console.log(newCard)
+    const newCard = {...oldCard[0]}
+    newCard.free_class = 1;
+    
+    return db('punches').where({ pass_id, user_id }).update(newCard)
+    .then( updateRes => {
+        return updateRes
+    })
+    .catch( updateErr => {
+        return updateErr;
+    })
 }
 
 function createPunch(incomingPunchObj) {
-    return db('punches').insert(incomingPunchObj)
+    const newPunchObj = {...incomingPunchObj, punch_count: 1}
+    return db('punches').insert(newPunchObj)
     .then( createRes => {
         return getPunchById(incomingPunchObj)
     })
@@ -91,8 +100,9 @@ function incrementPunches(existingPunch) {
         })
         .catch( checkErr => {
             console.log(checkErr)
+            return checkErr
         })
-        return getPunchById({ pass_id, user_id })
+        return 'updated'
     })
     .catch( updateErr => {
         return updateErr;
@@ -113,7 +123,8 @@ async function punch(incomingPunchObj) {
         if (existingPunch.free_class === 1) {
             resetPunches();
         } else {
-            return incrementPunches(existingPunch)
+            incrementPunches(existingPunch)
+            return getPunchById(incomingPunchObj)
         }
     } else {
         return createPunch(incomingPunchObj)
