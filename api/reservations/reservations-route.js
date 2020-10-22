@@ -29,11 +29,20 @@ router.post("/", clientLoggedIn, (req, res) => {
   dbFun
     .createReservation(reservation)
     .then((result) => {
-      res
-        .status(201)
-        .json(
-          `user_id: ${reservation.user_id} is now registered for class_id: ${reservation.class_id} reservation id is ${result}`
-        );
+      console.log(result);
+      if (result == "class full") {
+        res
+          .status(200)
+          .json(
+            `This class is full, please try registering for a different one`
+          );
+      } else {
+        res
+          .status(201)
+          .json(
+            `user_id: ${reservation.user_id} is now registered for class_id: ${reservation.class_id} reservation id is ${result}`
+          );
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -47,9 +56,9 @@ router.delete("/:id", clientLoggedIn, (req, res) => {
   dbFun
     .getReservationById(req.params.id)
     .then((resultReservation) => {
-      console.log(resultReservation)
-      console.log(resultReservation[0].user_id)
-      console.log(req.user_id)
+      console.log(resultReservation);
+      console.log(resultReservation[0].user_id);
+      console.log(req.user_id);
       if (resultReservation[0].user_id === req.user_id) {
         dbFun
           .removeReservation(req.params.id)
@@ -58,17 +67,15 @@ router.delete("/:id", clientLoggedIn, (req, res) => {
           })
           .catch((err) => {
             console.log(err);
-            res
-              .status(500)
-              .json({
-                message: "sorry something is wrong with the server",
-                err,
-              });
+            res.status(500).json({
+              message: "sorry something is wrong with the server",
+              err,
+            });
           });
       } else {
         res
           .status(401)
-          .json({ message: "that reservation cannot be found for this user"});
+          .json({ message: "that reservation cannot be found for this user" });
       }
     })
     .catch((err) => {
