@@ -326,7 +326,7 @@ Recieve response:
 Requires Authorization header with instructor JSON Web Token
 Recieve array of all punch passes
 
-#### Create Punch Pass or POST api/pass
+#### Punch a pass to record attendance, or POST api/punch/increment
 ---
 
 Requires Authorization header with instructor JSON Web Token
