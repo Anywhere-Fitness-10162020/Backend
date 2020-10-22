@@ -349,19 +349,3 @@ Recieve response:
     }
 ]
 ```
-
-
------
-## To do:
-
-x setup make reservation endpoint
-x move getClassByUserId to users router as that make more sense from url structure perspective
-x get rid of addClassByUserId as that is now createReservation
-x add instructor_id to classes table
-x documentation for each endpoint
-x instructors need to only be able to register their account if they have an auth code
-x Authentication and Authorization
-x punch passes
-x attendence punches/increments
-- don't allow registration if class is full
-- tests
